@@ -8,6 +8,7 @@
             "name": "verisync",
             "request": "launch",
             "type": "dart"
+        
         },
         {
             "name": "verisync (profile mode)",
