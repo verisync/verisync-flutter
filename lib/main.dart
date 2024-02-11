@@ -2,7 +2,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:verisync/verisync_widget.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,178 +15,52 @@ Future main() async {
   runApp(const MaterialApp(home: MyApp()));
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final GlobalKey webViewKey = GlobalKey();
-
-  InAppWebViewController? webViewController;
-  InAppWebViewSettings settings = InAppWebViewSettings(
-      isInspectable: kDebugMode,
-      mediaPlaybackRequiresUserGesture: false,
-      allowsInlineMediaPlayback: true,
-      iframeAllow: "camera; microphone",
-      iframeAllowFullscreen: true);
-
-  PullToRefreshController? pullToRefreshController;
-  String url = "";
-  double progress = 0;
-  final urlController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    pullToRefreshController = kIsWeb
-        ? null
-        : PullToRefreshController(
-            settings: PullToRefreshSettings(
-              color: Colors.blue,
-            ),
-            onRefresh: () async {
-              if (defaultTargetPlatform == TargetPlatform.android) {
-                webViewController?.reload();
-              } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-                webViewController?.loadUrl(
-                    urlRequest:
-                        URLRequest(url: await webViewController?.getUrl()));
-              }
-            },
-          );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Demo")),
-        body: SafeArea(
-            child: Column(children: <Widget>[
-          TextField(
-            decoration: const InputDecoration(prefixIcon: Icon(Icons.search)),
-            controller: urlController,
-            keyboardType: TextInputType.url,
-            onSubmitted: (value) {
-              var url = WebUri(value);
-              if (url.scheme.isEmpty) {
-                url = WebUri("https://www.google.com/search?q=$value");
-              }
-              webViewController?.loadUrl(urlRequest: URLRequest(url: url));
-            },
-          ),
-          Expanded(
-            child: Stack(
-              children: [
-                InAppWebView(
-                  key: webViewKey,
-                  initialUrlRequest: URLRequest(
-                      url: WebUri(
-                          "https://app.verisync.co/synchronizer/authorize?flow_id=3ea0117e-e04c-4d22-aec9-08fd5b2ab2da&client_id=71156b6946cc8917755d1ff815cd62cb&redirect_url=https%3A%2F%2Fsynchronizer-demo.vercel.app%2Fsuccess")),
-                  initialSettings: settings,
-                  pullToRefreshController: pullToRefreshController,
-                  onWebViewCreated: (controller) {
-                    webViewController = controller;
-                  },
-                  onLoadStart: (controller, url) {
-                    setState(() {
-                      this.url = url.toString();
-                      urlController.text = this.url;
-                    });
-                  },
-                  onPermissionRequest: (controller, request) async {
-                    return PermissionResponse(
-                        resources: request.resources,
-                        action: PermissionResponseAction.GRANT);
-                  },
-                  shouldOverrideUrlLoading:
-                      (controller, navigationAction) async {
-                    var uri = navigationAction.request.url!;
-
-                    if (![
-                      "http",
-                      "https",
-                      "file",
-                      "chrome",
-                      "data",
-                      "javascript",
-                      "about"
-                    ].contains(uri.scheme)) {
-                      if (await canLaunchUrl(uri)) {
-                        // Launch the App
-                        await launchUrl(
-                          uri,
-                        );
-                        // and cancel the request
-                        return NavigationActionPolicy.CANCEL;
-                      }
-                    }
-
-                    return NavigationActionPolicy.ALLOW;
-                  },
-                  onLoadStop: (controller, url) async {
-                    pullToRefreshController?.endRefreshing();
-                    setState(() {
-                      this.url = url.toString();
-                      urlController.text = this.url;
-                    });
-                  },
-                  onReceivedError: (controller, request, error) {
-                    pullToRefreshController?.endRefreshing();
-                  },
-                  onProgressChanged: (controller, progress) {
-                    if (progress == 100) {
-                      pullToRefreshController?.endRefreshing();
-                    }
-                    setState(() {
-                      this.progress = progress / 100;
-                      urlController.text = url;
-                    });
-                  },
-                  onUpdateVisitedHistory: (controller, url, androidIsReload) {
-                    setState(() {
-                      this.url = url.toString();
-                      urlController.text = this.url;
-                    });
-                  },
-                  onConsoleMessage: (controller, consoleMessage) {
-                    if (kDebugMode) {
-                      print(consoleMessage);
-                    }
-                  },
-                ),
-                progress < 1.0
-                    ? LinearProgressIndicator(value: progress)
-                    : Container(),
-              ],
-            ),
-          ),
-          ButtonBar(
-            alignment: MainAxisAlignment.center,
+        appBar: AppBar(
+          title: const Text('Verisync Example'),
+        ),
+        body: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                child: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  webViewController?.goBack();
+                onPressed: () async {
+                  var status = await Permission.camera.status;
+                  if (status.isDenied) {
+                    await Permission.camera.request();
+                  } else if (status.isPermanentlyDenied) {
+                    openAppSettings();
+                  } else {
+                    // ignore: use_build_context_synchronously
+                    showAdaptiveDialog(
+                      context: context,
+                      builder: (BuildContext dialogContext) => VerisyncWidget(
+                        flowId: "3ea0117e-e04c-4d22-aec9-08fd5b2ab2da",
+                        redirectUrl:
+                            "https://synchronizer-demo.vercel.app/success",
+                        clientId: "71156b6946cc8917755d1ff815cd62cb",
+                        callbackSuccess: (dialogContext) {
+                          ScaffoldMessenger.of(dialogContext).showSnackBar(
+                            const SnackBar(
+                              content: Text("Verification successful"),
+                              duration: Duration(seconds: 3),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }
                 },
-              ),
-              ElevatedButton(
-                child: const Icon(Icons.arrow_forward),
-                onPressed: () {
-                  webViewController?.goForward();
-                },
-              ),
-              ElevatedButton(
-                child: const Icon(Icons.refresh),
-                onPressed: () {
-                  webViewController?.reload();
-                },
+                child: const Text('Verify your identity'),
               ),
             ],
           ),
-        ])));
+        ));
   }
 }
