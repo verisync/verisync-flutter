@@ -36,26 +36,25 @@ class MyApp extends StatelessWidget {
                     await Permission.camera.request();
                   } else if (status.isPermanentlyDenied) {
                     openAppSettings();
-                  } else {
-                    // ignore: use_build_context_synchronously
-                    showAdaptiveDialog(
-                      context: context,
-                      builder: (BuildContext dialogContext) => VerisyncWidget(
-                        flowId: "3ea0117e-e04c-4d22-aec9-08fd5b2ab2da",
-                        redirectUrl:
-                            "https://synchronizer-demo.vercel.app/success",
-                        clientId: "71156b6946cc8917755d1ff815cd62cb",
-                        callbackSuccess: (dialogContext) {
-                          ScaffoldMessenger.of(dialogContext).showSnackBar(
-                            const SnackBar(
-                              content: Text("Verification successful"),
-                              duration: Duration(seconds: 3),
-                            ),
-                          );
-                        },
-                      ),
-                    );
                   }
+                  //  ignore: use_build_context_synchronously
+                  showAdaptiveDialog(
+                    context: context,
+                    builder: (BuildContext dialogContext) => VerisyncWidget(
+                      flowId: "3ea0117e-e04c-4d22-aec9-08fd5b2ab2da",
+                      redirectUrl:
+                          "https://synchronizer-demo.vercel.app/success",
+                      clientId: "71156b6946cc8917755d1ff815cd62cb",
+                      callbackSuccess: (dialogContext) {
+                        ScaffoldMessenger.of(dialogContext).showSnackBar(
+                          const SnackBar(
+                            content: Text("Verification successful"),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                      },
+                    ),
+                  );
                 },
                 child: const Text('Verify your identity'),
               ),
