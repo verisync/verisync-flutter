@@ -30,6 +30,7 @@ ElevatedButton(
                       flowId: "<provide your call flowID>",
                       redirectUrl: "<provide your redirectUrl>",
                       clientId: "provide your clientID",
+                      email: "provide email",
                       callbackSuccess: (dialogContext) {
                         ScaffoldMessenger.of(dialogContext).showSnackBar(
                           const SnackBar(
