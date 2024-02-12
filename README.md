@@ -11,25 +11,50 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# Verisync
+
+This package is for the **verisync** KYC service that helps simply the **KYC** process.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This package uses flutter_inappwebview to display the verisync KYC process. It as simple widget that takes in the following argument: `redirectUrl`, `flowId`, `clientId`, optional `email`, a function `callbackSuccess` to handle your success case, and an optional function `callbackError` to handle your error case.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Create your verisync account *here* if you do no already have one. Grab your flowId, and clientId  from *here* .
+
+### next install the package by running
+
+```dart
+flutter pub add verisync
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+A simple example
 
 ```dart
-const like = 'sample';
+ElevatedButton(
+                onPressed: () {
+                  showAdaptiveDialog(
+                    context: context,
+                    builder: (BuildContext dialogContext) => VerisyncWidget(
+                      flowId: "<provide your call flowID>",
+                      redirectUrl: "<provide your redirectUrl>",
+                      clientId: "provide your clientID",
+                      callbackSuccess: (dialogContext) {
+                        ScaffoldMessenger.of(dialogContext).showSnackBar(
+                          const SnackBar(
+                            content: Text("Verification successful"),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: const Text('Verify your identity'),
+              ),
 ```
 
 ## Additional information
