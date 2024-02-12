@@ -1,17 +1,16 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:verisync/verisync_widget.dart';
+import 'package:verisync/verisync.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) {
-    await InAppWebViewController.setWebContentsDebuggingEnabled(kDebugMode);
+  var status = await Permission.camera.status;
+  if (status.isDenied) {
+    await Permission.camera.request();
+  } else if (status.isPermanentlyDenied) {
+    openAppSettings();
   }
-
   runApp(const MaterialApp(home: MyApp()));
 }
 
@@ -30,14 +29,7 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                onPressed: () async {
-                  var status = await Permission.camera.status;
-                  if (status.isDenied) {
-                    await Permission.camera.request();
-                  } else if (status.isPermanentlyDenied) {
-                    openAppSettings();
-                  }
-                  //  ignore: use_build_context_synchronously
+                onPressed: () {
                   showAdaptiveDialog(
                     context: context,
                     builder: (BuildContext dialogContext) => VerisyncWidget(

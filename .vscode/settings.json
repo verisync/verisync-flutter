@@ -1,11 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
     "cSpell.words": [
-        "autoplay",
-        "fullscreen",
-        "iframe",
-        "inappwebview",
-        "Inspectable",
-        "Verisync"
+        "verysync"
     ]
 }

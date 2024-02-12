@@ -1,4 +1,4 @@
-name: verisync_package
+name: verisync
 description: "A new Flutter package project."
 version: 0.0.1
 homepage: https://verisync.co/policies
@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_inappwebview: ^6.0.0
 
 dev_dependencies:
   flutter_test:

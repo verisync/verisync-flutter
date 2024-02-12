@@ -1,20 +1,23 @@
+library verisync_widget;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-/// This file contains the [VerisyncWidget] class, which is a Flutter widget that displays a fullscreen dialog with an embedded web view.
-/// The web view is used to authorize a user and perform a callback upon successful authorization.
-/// The widget requires the following parameters:
-/// - [redirectUrl]: The URL to redirect to after successful authorization.
-/// - [flowId]: The ID of the authorization flow.
-/// - [clientId]: The ID of the client.
-/// - [callbackSuccess]: A callback function that is called upon successful authorization.
-/// - [callbackError]: An optional callback function that is called if there is an error during authorization.
-/// The widget also includes methods for handling actions such as closing the dialog and refreshing the web view.
-/// The progress of the web view loading is displayed using a progress bar.
 class VerisyncWidget extends StatefulWidget {
   final String redirectUrl, flowId, clientId;
   final void Function(BuildContext context) callbackSuccess;
   final void Function(BuildContext context)? callbackError;
+
+  /// This file contains the [VerisyncWidget] class, which is a Flutter widget that displays a fullscreen dialog with an embedded web view.
+  /// The web view is used to authorize a user and perform a callback upon successful authorization.
+  /// The widget requires the following parameters:
+  /// - [redirectUrl] : The URL to redirect to after successful authorization.
+  /// - [flowId] : The ID of the authorization flow.
+  /// - [clientId] : The ID of the client.
+  /// - [callbackSuccess] : A callback function that is called upon successful authorization.
+  /// - [callbackError] : An optional callback function that is called if there is an error during authorization.
+  /// The widget also includes methods for handling actions such as closing the dialog and refreshing the web view.
+  /// The progress of the web view loading is displayed using a progress bar.
 
   const VerisyncWidget({
     Key? key,
