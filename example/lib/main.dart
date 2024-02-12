@@ -33,10 +33,9 @@ class MyApp extends StatelessWidget {
                   showAdaptiveDialog(
                     context: context,
                     builder: (BuildContext dialogContext) => VerisyncWidget(
-                      flowId: "3ea0117e-e04c-4d22-aec9-08fd5b2ab2da",
-                      redirectUrl:
-                          "https://synchronizer-demo.vercel.app/success",
-                      clientId: "71156b6946cc8917755d1ff815cd62cb",
+                      flowId: "<provide your call flowID>",
+                      redirectUrl: "<provide your redirectUrl>",
+                      clientId: "provide your clientID",
                       callbackSuccess: (dialogContext) {
                         ScaffoldMessenger.of(dialogContext).showSnackBar(
                           const SnackBar(

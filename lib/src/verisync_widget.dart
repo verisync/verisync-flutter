@@ -5,6 +5,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class VerisyncWidget extends StatefulWidget {
   final String redirectUrl, flowId, clientId;
+  final String? email;
   final void Function(BuildContext context) callbackSuccess;
   final void Function(BuildContext context)? callbackError;
 
@@ -14,19 +15,21 @@ class VerisyncWidget extends StatefulWidget {
   /// - [redirectUrl] : The URL to redirect to after successful authorization.
   /// - [flowId] : The ID of the authorization flow.
   /// - [clientId] : The ID of the client.
+  /// - optional [email] : The email of the client.
   /// - [callbackSuccess] : A callback function that is called upon successful authorization.
-  /// - [callbackError] : An optional callback function that is called if there is an error during authorization.
+  /// - optional [callbackError] : An optional callback function that is called if there is an error during authorization.
   /// The widget also includes methods for handling actions such as closing the dialog and refreshing the web view.
   /// The progress of the web view loading is displayed using a progress bar.
 
-  const VerisyncWidget({
-    Key? key,
-    required this.redirectUrl,
-    required this.flowId,
-    required this.clientId,
-    required this.callbackSuccess,
-    this.callbackError,
-  }) : super(key: key);
+  const VerisyncWidget(
+      {Key? key,
+      required this.redirectUrl,
+      required this.flowId,
+      required this.clientId,
+      required this.callbackSuccess,
+      this.callbackError,
+      this.email})
+      : super(key: key);
 
   @override
   State<VerisyncWidget> createState() => _VerisyncWidgetState();
@@ -81,7 +84,7 @@ class _VerisyncWidgetState extends State<VerisyncWidget> {
       key: _webViewKey,
       initialUrlRequest: URLRequest(
         url: WebUri(
-          "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}",
+          "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}&email=${widget.email}",
         ),
       ),
       initialSettings: _settings,
