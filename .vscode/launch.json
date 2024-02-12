@@ -7,21 +7,26 @@
         {
             "name": "verisync",
             "request": "launch",
-            "type": "dart"
-        
+            "type": "dart",
+            "program": "verisync_package/example/lib/main.dart"
         },
         {
             "name": "verisync (profile mode)",
             "request": "launch",
             "type": "dart",
             
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "program": "verisync_package/example/lib/main.dart"
+
         },
         {
             "name": "verisync (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "program": "verisync_package/example/lib/main.dart"
+
+
         }
     ]
 }

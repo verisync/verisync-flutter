@@ -1,0 +1,1 @@
+ /Users/abdulbasitsaid/development/verisync/.dart_tool/flutter_build/f8677a252eeaaa3a32946a4acbe973c7/native_assets.yaml: 
