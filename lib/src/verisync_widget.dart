@@ -1,6 +1,7 @@
 library verisync_widget;
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -84,12 +85,14 @@ class _VerisyncWidgetState extends State<VerisyncWidget> {
   }
 
   Widget _buildWebView() {
+    var webUri = WebUri(
+      "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}&email=${widget.email}&metadata=${json.encode(widget.metadata)}",
+    );
+
     return InAppWebView(
       key: _webViewKey,
       initialUrlRequest: URLRequest(
-        url: WebUri(
-          "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}&email=${widget.email}&metadata=${json.encode(widget.metadata)}",
-        ),
+        url: webUri,
       ),
       initialSettings: _settings,
       onWebViewCreated: (controller) => _webViewController = controller,

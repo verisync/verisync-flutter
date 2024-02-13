@@ -37,6 +37,10 @@ class MyApp extends StatelessWidget {
                       redirectUrl: "<provide your redirectUrl>",
                       clientId: "provide your clientID",
                       email: "provide email",
+                      metadata: const {
+                        "name": "John Doe",
+                        "phone": "1234567890",
+                      },
                       callbackSuccess: (dialogContext) {
                         ScaffoldMessenger.of(dialogContext).showSnackBar(
                           const SnackBar(
