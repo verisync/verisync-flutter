@@ -86,6 +86,10 @@ class _VerisyncWidgetState extends State<VerisyncWidget> {
         url: WebUri(
           "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}&email=${widget.email}",
         ),
+        headers: {
+          "Content-Type": "application/json",
+          "metadata": "This is a authorization request from a flutter app.",
+        },
       ),
       initialSettings: _settings,
       onWebViewCreated: (controller) => _webViewController = controller,
