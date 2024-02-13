@@ -1,5 +1,7 @@
 library verisync_widget;
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -8,6 +10,7 @@ class VerisyncWidget extends StatefulWidget {
   final String? email;
   final void Function(BuildContext context) callbackSuccess;
   final void Function(BuildContext context)? callbackError;
+  final Map<dynamic, dynamic>? metadata;
 
   /// This file contains the [VerisyncWidget] class, which is a Flutter widget that displays a fullscreen dialog with an embedded web view.
   /// The web view is used to authorize a user and perform a callback upon successful authorization.
@@ -21,15 +24,16 @@ class VerisyncWidget extends StatefulWidget {
   /// The widget also includes methods for handling actions such as closing the dialog and refreshing the web view.
   /// The progress of the web view loading is displayed using a progress bar.
 
-  const VerisyncWidget(
-      {Key? key,
-      required this.redirectUrl,
-      required this.flowId,
-      required this.clientId,
-      required this.callbackSuccess,
-      this.callbackError,
-      this.email})
-      : super(key: key);
+  const VerisyncWidget({
+    Key? key,
+    required this.redirectUrl,
+    required this.flowId,
+    required this.clientId,
+    required this.callbackSuccess,
+    this.callbackError,
+    this.email,
+    this.metadata,
+  }) : super(key: key);
 
   @override
   State<VerisyncWidget> createState() => _VerisyncWidgetState();
@@ -84,12 +88,8 @@ class _VerisyncWidgetState extends State<VerisyncWidget> {
       key: _webViewKey,
       initialUrlRequest: URLRequest(
         url: WebUri(
-          "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}&email=${widget.email}",
+          "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}&email=${widget.email}&metadata=${json.encode(widget.metadata)}",
         ),
-        headers: {
-          "Content-Type": "application/json",
-          "metadata": "This is a authorization request from a flutter app.",
-        },
       ),
       initialSettings: _settings,
       onWebViewCreated: (controller) => _webViewController = controller,
