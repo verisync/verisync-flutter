@@ -5,13 +5,13 @@ This package is for the **verisync** KYC service that helps simply the **KYC** p
 
 ## Features
 
-This package uses flutter_inappwebview to display the verisync KYC process. It as simple widget that takes in the following argument: `redirectUrl`, `flowId`, `clientId`, optional `email`, a function `callbackSuccess` to handle your success case, and an optional function `callbackError` to handle your error case, optional `metaData` incase extra data is needed.
+This package uses flutter_inappwebview to display the verisync KYC process. It as simple widget that takes in the following argument: `redirectUrl`, `flowId`, `clientId`, optional `email`, a function `callbackSuccess` to handle your success case, and an optional function `callbackError` to handle your error case, optional `metaData` in case extra data is needed.
 
 ## Getting started
 
-Create your verisync account *here* if you do no already have one. Grab your flowId, and clientId  from *here* .
+Create your Verisync account *here* if you do not already have one. Grab your flowId, and clientId  from *here*.
 
-### next install the package by running
+### Next install the package by running
 
 ```dart
 flutter pub add verisync
@@ -19,8 +19,9 @@ flutter pub add verisync
 
 ## Usage
 
-Here is a Example
-![video example](./assets/verysinc_example.mp4)
+Here is an Example
+
+https://github.com/verisync/verisync-flutter/assets/16627656/e730f150-b43d-4193-9fe8-d3a997855ddf
 
 A simple example
 
@@ -52,7 +53,7 @@ ElevatedButton(
 
 ## Author
 
-<img src='./assets/author.jpg' width='30'></img> [Abdulbasit Said Ibrahim (codesahir)](https://github.com/AbdulbasitSaid)
+![Abdulbasit Said Ibrahim (codesahir)](https://github.com/AbdulbasitSaid)
 
 ## Contributors
 
