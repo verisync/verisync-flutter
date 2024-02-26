@@ -1,5 +1,9 @@
 # Changes
 
+## 0.0.6
+
+* Improved documentation(fixed braking video link).
+
 ## 0.0.5
 
 * Improved documentation.
