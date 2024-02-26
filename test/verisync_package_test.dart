@@ -1,1 +1,3 @@
-void main() {}
+void main() {
+  // no test needed
+}

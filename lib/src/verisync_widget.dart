@@ -1,8 +1,6 @@
 library verisync_widget;
 
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -22,6 +20,7 @@ class VerisyncWidget extends StatefulWidget {
   /// - optional [email] : The email of the client.
   /// - [callbackSuccess] : A callback function that is called upon successful authorization.
   /// - optional [callbackError] : An optional callback function that is called if there is an error during authorization.
+  /// - optional [metadata] : A map of additional data to be sent to the server.
   /// The widget also includes methods for handling actions such as closing the dialog and refreshing the web view.
   /// The progress of the web view loading is displayed using a progress bar.
 

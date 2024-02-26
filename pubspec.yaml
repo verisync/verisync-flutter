@@ -1,5 +1,5 @@
 name: verisync
-description: "verisync is a KYC plugin"
+description: "Verisync is a KYC service that simplifies both client and customers \"Know Your Customer \" process. This package is intended simplify the integration process in a flutter project. verisync package is supported on IOS, Android, MacOS and Web"
 version: 0.0.4
 homepage: https://verisync.co/policies
 

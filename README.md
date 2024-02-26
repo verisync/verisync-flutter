@@ -5,7 +5,7 @@ This package is for the **verisync** KYC service that helps simply the **KYC** p
 
 ## Features
 
-This package uses flutter_inappwebview to display the verisync KYC process. It as simple widget that takes in the following argument: `redirectUrl`, `flowId`, `clientId`, optional `email`, a function `callbackSuccess` to handle your success case, and an optional function `callbackError` to handle your error case.
+This package uses flutter_inappwebview to display the verisync KYC process. It as simple widget that takes in the following argument: `redirectUrl`, `flowId`, `clientId`, optional `email`, a function `callbackSuccess` to handle your success case, and an optional function `callbackError` to handle your error case, optional `metaData` incase extra data is needed.
 
 ## Getting started
 
@@ -31,6 +31,7 @@ ElevatedButton(
                       redirectUrl: "<provide your redirectUrl>",
                       clientId: "provide your clientID",
                       email: "provide email",
+                      metadata:"< A map of additional data to be sent to the server example(Map<dynamic, dynamic>? metadata)>"
                       callbackSuccess: (dialogContext) {
                         ScaffoldMessenger.of(dialogContext).showSnackBar(
                           const SnackBar(
@@ -46,6 +47,10 @@ ElevatedButton(
               ),
 ```
 
-## Additional information
+## Author
+
+<img src='./assets/author.jpg' width='30'></img> [Abdulbasit Said Ibrahim (codesahir)](https://github.com/AbdulbasitSaid)
+
+## Contributors
 
 ...
