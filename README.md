@@ -19,6 +19,9 @@ flutter pub add verisync
 
 ## Usage
 
+Here is a Example
+![video example](./assets/verysinc_example.mp4)
+
 A simple example
 
 ```dart

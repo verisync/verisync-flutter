@@ -1,5 +1,9 @@
 # Changes
 
+## 0.0.5
+
+* Improved documentation.
+
 ## 0.0.4
 
 * Improved documentation.
