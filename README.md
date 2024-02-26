@@ -52,8 +52,6 @@ ElevatedButton(
 ```
 
 ## Author
-![author](https://github.com/verisync/verisync-flutter/assets/16627656/61b3da21-7950-4f20-808a-e26a20f13c2a =50)
-
 [Abdulbasit Said Ibrahim (codesahir)](https://github.com/AbdulbasitSaid)
 
 ## Contributors
