@@ -1,5 +1,5 @@
 name: verisync
-description: "Verisync is a KYC service that simplifies both client and customers \"Know Your Customer \" process. This package is intended simplify the integration process in a flutter project. verisync package is supported on IOS, Android, MacOS and Web"
+description: "Verisync simplifies KYC for clients and customers. It's easy to integrate into Flutter projects and supports IOS, Android, MacOS, and Web."
 
 version: 0.0.7
 homepage: https://verisync.co/policies
@@ -13,11 +13,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_inappwebview: ^6.0.0
+  permission_handler: ^11.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
