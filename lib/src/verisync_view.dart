@@ -1,45 +1,28 @@
-library verisync_widget;
+part of "../src/verisync_button.dart";
 
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
-class VerisyncWidget extends StatefulWidget {
+class VerisyncView extends StatefulWidget {
   final String redirectUrl, flowId, clientId;
   final String? email;
-  final void Function(BuildContext context) callbackSuccess;
-  final void Function(BuildContext context)? callbackError;
+  final void Function(BuildContext context) onSuccess;
+  final void Function(BuildContext context) onError;
   final Map<dynamic, dynamic>? metadata;
 
-  /// This file contains the [VerisyncWidget] class, which is a Flutter widget that displays a fullscreen dialog with an embedded web view.
-  /// The web view is used to authorize a user and perform a callback upon successful authorization.
-  /// The widget requires the following parameters:
-  /// - [redirectUrl] : The URL to redirect to after successful authorization.
-  /// - [flowId] : The ID of the authorization flow.
-  /// - [clientId] : The ID of the client.
-  /// - optional [email] : The email of the client.
-  /// - [callbackSuccess] : A callback function that is called upon successful authorization.
-  /// - optional [callbackError] : An optional callback function that is called if there is an error during authorization.
-  /// - optional [metadata] : A map of additional data to be sent to the server.
-  /// The widget also includes methods for handling actions such as closing the dialog and refreshing the web view.
-  /// The progress of the web view loading is displayed using a progress bar.
-
-  const VerisyncWidget({
-    Key? key,
+  const VerisyncView({
+    super.key,
     required this.redirectUrl,
     required this.flowId,
     required this.clientId,
-    required this.callbackSuccess,
-    this.callbackError,
+    required this.onSuccess,
+    required this.onError,
     this.email,
     this.metadata,
-  }) : super(key: key);
+  });
 
   @override
-  State<VerisyncWidget> createState() => _VerisyncWidgetState();
+  State<VerisyncView> createState() => _VerisyncViewState();
 }
 
-class _VerisyncWidgetState extends State<VerisyncWidget> {
+class _VerisyncViewState extends State<VerisyncView> {
   late InAppWebViewController _webViewController;
   final GlobalKey _webViewKey = GlobalKey();
   double _progress = 0;
@@ -71,7 +54,7 @@ class _VerisyncWidgetState extends State<VerisyncWidget> {
         IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
-            widget.callbackError?.call(context);
+            widget.onError.call(context);
             _handleClose(context);
           },
         ),
@@ -98,7 +81,7 @@ class _VerisyncWidgetState extends State<VerisyncWidget> {
       onLoadStart: (controller, url) => setState(() {}),
       onLoadStop: (controller, url) async {
         if (url?.rawValue == widget.redirectUrl) {
-          widget.callbackSuccess(context);
+          widget.onSuccess(context);
           _handleClose(context);
         }
       },
