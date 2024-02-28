@@ -87,9 +87,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/flutter_lints-3.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "flutter_test",
@@ -111,7 +111,7 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/lints-2.1.1",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/lints-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -136,6 +136,42 @@
     {
       "name": "path",
       "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/path-1.8.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "permission_handler",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/permission_handler-11.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "permission_handler_android",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "permission_handler_apple",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/permission_handler_apple-9.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "permission_handler_html",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
+      "name": "permission_handler_platform_interface",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-4.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "permission_handler_windows",
+      "rootUri": "file:///Users/abdulbasitsaid/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -206,7 +242,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-02-26T11:32:00.076362Z",
+  "generated": "2024-02-27T13:25:59.546152Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 }
