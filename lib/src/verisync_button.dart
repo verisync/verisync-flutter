@@ -18,8 +18,8 @@ part 'verisync_view.dart';
 /// If the camera permission is denied, it requests the camera permission and shows the view if granted.
 /// If the camera permission is permanently denied, it prompts the user to open the app settings to enable the camera permission.
 ///
-/// The Verisync identity verification view is shown using a dialog and the [VerisyncView] widget.
-/// The [flowId], [redirectUrl], [clientId], [email], [metadata], [onSuccess], and [onError] parameters are passed to the [VerisyncView].
+/// The Verisync identity verification view is shown using a dialog and the [_VerisyncView] widget.
+/// The [flowId], [redirectUrl], [clientId], [email], [metadata], [onSuccess], and [onError] parameters are passed to the [_VerisyncView].
 /// If [onSuccess] is not provided, a default success snackbar is shown.
 /// If [onError] is not provided, a default error snackbar is shown.
 ///
@@ -109,7 +109,7 @@ class VerisyncButton extends StatelessWidget {
   void _showVerisyncView(BuildContext context) {
     showAdaptiveDialog(
       context: context,
-      builder: (BuildContext dialogContext) => VerisyncView(
+      builder: (BuildContext dialogContext) => _VerisyncView(
         flowId: flowId,
         redirectUrl: redirectUrl,
         clientId: clientId,
