@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 7.0.1-wip">
+  <meta name="description" content="verisync API docs, for the Dart programming language.">
+  <title>verisync - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://verisync.co/policies">verisync package</a></li>
+  </ol>
+  <div class="self-name">verisync</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="verisync">Verisync</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The Verisync Identity Verification Button is a Flutter widget designed to simplify the process of integrating identity verification within your Flutter application. It wraps the complexity of initiating and handling identity verification flows into a simple, easy-to-use button widget.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Simple Integration</strong>: Just drop the <code>VerisyncButton</code> into your widget tree to get started.</li>
+<li><strong>Customizable</strong>: Supports customization of button appearance and behavior through parameters.</li>
+<li><strong>Permission Handling</strong>: Automatically handles camera permission requests necessary for identity verification.</li>
+<li><strong>Callback Support</strong>: Provides <code>onSuccess</code> and <code>onError</code> callbacks to handle the verification result.</li>
+<li><strong>Dialog Presentation</strong>: Shows the identity verification process in a dialog for a seamless user experience.</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<h3 id="dependencies">Dependencies</h3>
+<p>Add the following dependencies to your <code>pubspec.yaml</code> file:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  flutter:
+    sdk: flutter
+  verisync: ^latest_version
+</code></pre>
+<h2 id="import">Import</h2>
+<pre class="language-dart"><code class="language-dart">import 'package:your_package/verisync_button.dart'; // Adjust the import path based on your project structure
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>To use the VerisyncButton, simply include it in your widget tree and provide the necessary parameters:</p>
+<pre class="language-dart"><code class="language-dart">VerisyncButton(
+  redirectUrl: 'https://example.com/redirect',
+  flowId: 'your_flow_id',
+  clientId: 'your_client_id',
+  email: 'optional_email@example.com', // Optional
+  metadata: {'key': 'value'}, // Optional
+  onSuccess: (context) {
+    // Optional Handle verification success
+  },
+  onError: (context) {
+    // Optional Handle verification error
+  },
+  style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all(Colors.blue),
+  ),
+  child: Text('Verify Identity'),  //Optional Customize button child widget
+)
+</code></pre>
+<p>If you do not intend to customize the button, simply add only the required parameters like so:</p>
+<pre class="language-dart"><code class="language-dart">VerisyncButton(
+  redirectUrl: 'https://example.com/redirect',
+  flowId: 'your_flow_id',
+  clientId: 'your_client_id',
+  ),
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<ul>
+<li>redirectUrl: The URL to which the verification process will redirect upon completion.</li>
+<li>flowId: The flow ID for the verification process.</li>
+<li>clientId: Your client ID for the verification service.</li>
+<li>email: (Optional) The email address to prefill in the verification process.</li>
+<li>metadata: (Optional) Additional metadata to pass along with the verification request.</li>
+<li>onSuccess: (Optional) Callback function that is called upon successful verification.</li>
+<li>onError: (Optional) Callback function that is called upon a verification error.</li>
+<li>style: (Optional) Custom style for the button.
+child: (Optional) Custom child widget to display inside the button.</li>
+</ul>
+<h2 id="handling-permissions">Handling Permissions</h2>
+<p>The VerisyncButton automatically handles camera permissions required for identity verification. If permissions are denied or not granted, it provides guidance to the user for enabling them through the app settings. It depend <a href="https://pub.dev/packages/permission_handler">permission_handler</a> package. Please read the instructions on platform specific requirements from:  <a href="https://pub.dev/packages/permission_handler">permission_handler</a>.</p>
+<h2 id="customization">Customization</h2>
+<p>Customize the appearance and behavior of the VerisyncButton by providing custom values for the style and child parameters, as well as handling the onSuccess and onError events according to your application's needs.</p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="verisync">
+  <span class="name"><a href="verisync/verisync-library.html">verisync</a></span> 
+
+</dt>
+<dd>
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://verisync.co/policies">verisync package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">verisync</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="verisync/verisync-library.html">verisync</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    verisync
+      0.1.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
