@@ -117,6 +117,73 @@ child: (Optional) Custom child widget to display inside the button.</li>
 <p>The VerisyncButton automatically handles camera permissions required for identity verification. If permissions are denied or not granted, it provides guidance to the user for enabling them through the app settings. It depend <a href="https://pub.dev/packages/permission_handler">permission_handler</a> package. Please read the instructions on platform specific requirements from:  <a href="https://pub.dev/packages/permission_handler">permission_handler</a>.</p>
 <h2 id="customization">Customization</h2>
 <p>Customize the appearance and behavior of the VerisyncButton by providing custom values for the style and child parameters, as well as handling the onSuccess and onError events according to your application's needs.</p>
+<h2 id="migration-guide-integrating-verisyncbutton">Migration Guide: Integrating VerisyncButton</h2>
+<p>This guide outlines the steps to migrate from manually handling identity verification with VerisyncWidget to using the VerisyncButton widget in your Flutter application.</p>
+<h3 id="changes-overview">Changes Overview</h3>
+<ul>
+<li>Permission Handling: The new VerisyncButton widget abstracts away the permission handling logic, making your main application code cleaner and focused on business logic.</li>
+<li>Simplification: Direct instantiation and usage of VerisyncWidget within a dialog is replaced by VerisyncButton, simplifying the codebase.</li>
+<li>Initialization: The explicit permission request and camera permission check in the main function are no longer necessary.</li>
+</ul>
+<h2 id="step-by-step-migration">Step-by-Step Migration</h2>
+<ol>
+<li>
+<p>Remove Permission Handling from main
+Old code in your main function may look like this:</p>
+<pre class="language-dart"><code class="language-dart">WidgetsFlutterBinding.ensureInitialized();
+var status = await Permission.camera.status;
+if (status.isDenied) {
+await Permission.camera.request();
+} else if (status.isPermanentlyDenied) {
+openAppSettings();
+}
+</code></pre>
+<p>In the new approach, remove these lines. The updated main function should only contain:</p>
+<pre class="language-dart"><code class="language-dart">runApp(const MaterialApp(home: MyApp()));
+</code></pre>
+</li>
+<li>
+<p>Update MyApp Widget
+Replace the usage of ElevatedButton with VerisyncWidget in a dialog by directly using VerisyncButton in the widget tree.</p>
+<p><strong>Before:</strong></p>
+<pre class="language-dart"><code class="language-dart">  ElevatedButton(
+    onPressed: () {
+    showAdaptiveDialog(
+    context: context,
+    builder: (BuildContext dialogContext) =&gt; VerisyncWidget(
+      // Parameters
+      ),
+    );
+  },
+  child: const Text('Verify your identity'),
+  ),
+</code></pre>
+<p><strong>After:</strong></p>
+<pre class="language-dart"><code class="language-dart">  const VerisyncButton(
+  flowId: "&lt;your flowId&gt;",
+  redirectUrl: "&lt;your redirectUrl&gt;",
+  clientId: "&lt;your clientId&gt;",
+),
+</code></pre>
+</li>
+<li>
+<p>Remove Unnecessary Imports Since permission handling is encapsulated within the VerisyncButton, remove the permission_handler package import      if its no longer used elsewhere in  your project.</p>
+<p><strong>Before:</strong></p>
+<pre class="language-dart"><code class="language-dart"> import 'package:permission_handler/permission_handler.dart';
+</code></pre>
+<p>After:</p>
+<p>Ensure this import is removed if not required.</p>
+</li>
+<li>
+<p>Adjust VerisyncButton Usage</p>
+<ul>
+<li>If you used additional parameters like email, metadata, callbackSuccess, or callbackError in the old VerisyncWidget, ensure to add them to VerisyncButton.</li>
+<li>VerisyncButton also provides onSuccess and onError callbacks, similar to callbackSuccess and callbackError. Adjust these according to the new API.</li>
+</ul>
+</li>
+</ol>
+<h3 id="summary">Summary</h3>
+<p>By following these steps, you will have successfully migrated to using the VerisyncButton widget, simplifying your code and encapsulating complex permission handling and identity verification logic. This migration enhances code maintainability and focuses on your application's core functionality.</p>
 </section>
 
 
