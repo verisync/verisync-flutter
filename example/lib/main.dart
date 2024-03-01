@@ -1,5 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+
+/// import 'package:verisync/verisync.dart' as [verisync];
+/// or import 'package:verisync/verisync.dart';
 import 'package:verisync/verisync.dart';
 
 Future main() async {

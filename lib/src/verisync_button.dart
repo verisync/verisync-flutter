@@ -20,15 +20,15 @@ class VerisyncButton extends StatelessWidget {
   final Widget? child;
 
   /// [VerisyncButton] Creates a new Verisync button widget.
-  /// The [redirectUrl] to redirect to after the verification process. This URL must be whitelisted in the Verisync dashboard.
-  /// This is a required parameter. The [flowID] for the verification process. This is a required parameter.
-  /// The [clientId] for the verification process. This is a required parameter.
-  /// The [email] of the user to verify. This is an optional parameter.
-  /// The [onSuccess] callback to be called when the verification process is successful. This is an optional parameter.
-  /// The [onError] callback to be called when the verification process fails. This is an optional parameter.
-  /// The [metadata] to be sent to the Verisync API. This is an optional parameter.
-  /// The [style] to be applied to the button. This is an optional parameter.
-  /// The [child] to be displayed on the button. This is an optional parameter.
+  /// The [VerisyncButton.redirectUrl] to redirect to after the verification process. This URL must be whitelisted in the Verisync dashboard.
+  /// This is a required parameter. The [VerisyncButton.flowID] for the verification process. This is a required parameter.
+  /// The [VerisyncButton.clientId] for the verification process. This is a required parameter.
+  /// The [VerisyncButton.email] of the user to verify. This is an optional parameter.
+  /// The [VerisyncButton.onSuccess] callback to be called when the verification process is successful. This is an optional parameter.
+  /// The [VerisyncButton.onError] callback to be called when the verification process fails. This is an optional parameter.
+  /// The [VerisyncButton.metadata] to be sent to the Verisync API. This is an optional parameter.
+  /// The [VerisyncButton.style] to be applied to the button. This is an optional parameter.
+  /// The [VerisyncButton.child] to be displayed on the button. This is an optional parameter.
   const VerisyncButton({
     super.key,
     required this.redirectUrl,
