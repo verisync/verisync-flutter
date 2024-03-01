@@ -98,70 +98,69 @@ This guide outlines the steps to migrate from manually handling identity verific
 ## Step-by-Step Migration
 
 1. Remove Permission Handling from main
-  Old code in your main function may look like this:
+   Old code in your main function may look like this:
 
-  ```dart
-  WidgetsFlutterBinding.ensureInitialized();
-  var status = await Permission.camera.status;
-  if (status.isDenied) {
-  await Permission.camera.request();
-  } else if (status.isPermanentlyDenied) {
-  openAppSettings();
-  }
-  ```
+    ```dart
+    WidgetsFlutterBinding.ensureInitialized();
+    var status = await Permission.camera.status;
+    if (status.isDenied) {
+    await Permission.camera.request();
+    } else if (status.isPermanentlyDenied) {
+    openAppSettings();
+    }
+    ```
 
-  In the new approach, remove these lines. The updated main function should only contain:
+    In the new approach, remove these lines. The updated main function should only contain:
 
-  ```dart
-  runApp(const MaterialApp(home: MyApp()));
-  ```
+    ```dart
+    runApp(const MaterialApp(home: MyApp()));
+    ```
 
 2. Update MyApp Widget
-Replace the usage of ElevatedButton with VerisyncWidget in a dialog by directly using VerisyncButton in the widget tree.
+    Replace the usage of ElevatedButton with VerisyncWidget in a dialog by directly using VerisyncButton in the widget tree.
 
-**Before:**
+    **Before:**
 
-```dart
-ElevatedButton(
-  onPressed: () {
-    showAdaptiveDialog(
-      context: context,
-      builder: (BuildContext dialogContext) => VerisyncWidget(
-        // Parameters
+    ```dart
+      ElevatedButton(
+        onPressed: () {
+        showAdaptiveDialog(
+        context: context,
+        builder: (BuildContext dialogContext) => VerisyncWidget(
+          // Parameters
+          ),
+        );
+      },
+      child: const Text('Verify your identity'),
       ),
-    );
-  },
-  child: const Text('Verify your identity'),
-),
-```
+    ```
 
-**After:**
+    **After:**
 
-```dart
-const VerisyncButton(
-  flowId: "<your flowId>",
-  redirectUrl: "<your redirectUrl>",
-  clientId: "<your clientId>",
-),
-```
+    ```dart
+      const VerisyncButton(
+      flowId: "<your flowId>",
+      redirectUrl: "<your redirectUrl>",
+      clientId: "<your clientId>",
+    ),
+    ```
 
-3. Remove Unnecessary Imports
-Since permission handling is encapsulated within the VerisyncButton, remove the permission_handler package import if its no longer used elsewhere in your project.
+3. Remove Unnecessary Imports Since permission handling is encapsulated within the VerisyncButton, remove the permission_handler package import      if its no longer used elsewhere in  your project.
 
-**Before:**
+    **Before:**
 
-```dart
-import 'package:permission_handler/permission_handler.dart';
-```
+    ```dart
+     import 'package:permission_handler/permission_handler.dart';
+    ```
 
-After:
+    After:
 
-Ensure this import is removed if not required.
+    Ensure this import is removed if not required.
 
 4. Adjust VerisyncButton Usage
 
-- If you used additional parameters like email, metadata, callbackSuccess, or callbackError in the old VerisyncWidget, ensure to add them to VerisyncButton.
-- VerisyncButton also provides onSuccess and onError callbacks, similar to callbackSuccess and callbackError. Adjust these according to the new API.
+    - If you used additional parameters like email, metadata, callbackSuccess, or callbackError in the old VerisyncWidget, ensure to add them to VerisyncButton.
+    - VerisyncButton also provides onSuccess and onError callbacks, similar to callbackSuccess and callbackError. Adjust these according to the new API.
 
 ### Summary
 

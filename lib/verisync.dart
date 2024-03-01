@@ -1,2 +1,1 @@
-
-export 'src/verisync_button.dart';
+export 'src/verisync_button.dart' show VerisyncButton;
