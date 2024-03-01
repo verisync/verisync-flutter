@@ -1,5 +1,9 @@
 # Changes
 
+## 0.1.1
+
+* improved docs
+
 ## 0.1.0
 
 * Moved permissions logic and ops to package
