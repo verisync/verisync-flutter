@@ -1,3 +1,2 @@
-library verisync;
 
-export 'package:verisync/src/verisync_widget.dart';
+export 'src/verisync_button.dart';
