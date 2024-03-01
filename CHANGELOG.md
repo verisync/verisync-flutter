@@ -1,5 +1,10 @@
 # Changes
 
+## 0.1.0
+
+* Moved permissions logic and ops to package
+* Improved developer experience.
+
 ## 0.0.7
 
 * Improved documentation
