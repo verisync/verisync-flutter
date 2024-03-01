@@ -1,7 +1,7 @@
 name: verisync
 description: "Verisync simplifies KYC for clients and customers. It's easy to integrate into Flutter projects and supports IOS, Android, Windows, and Web."
 
-version: 0.1.1
+version: 0.1.2
 homepage: https://verisync.co/policies
 repository: https://github.com/verisync/verisync-flutter
 
