@@ -3,8 +3,7 @@ part of "../src/verisync_button.dart";
 class _VerisyncView extends StatefulWidget {
   final String redirectUrl, flowId, clientId;
   final String? email;
-  final void Function(BuildContext context) onSuccess;
-  final void Function(BuildContext context) onError;
+  final void Function(BuildContext context)? onSuccess, onError;
   final Map<dynamic, dynamic>? metadata;
 
   /// [_VerisyncView] Creates a new Verisync view widget.
@@ -19,8 +18,8 @@ class _VerisyncView extends StatefulWidget {
     required this.redirectUrl,
     required this.flowId,
     required this.clientId,
-    required this.onSuccess,
-    required this.onError,
+    this.onSuccess,
+    this.onError,
     this.email,
     this.metadata,
   });
@@ -36,8 +35,7 @@ class _VerisyncViewState extends State<_VerisyncView> {
   double _progress = 0;
 
   /// The settings for the web view.
-  final InAppWebViewSettings _settings =
-      InAppWebViewSettings(iframeAllow: "camera", iframeAllowFullscreen: true);
+  final InAppWebViewSettings _settings = InAppWebViewSettings(iframeAllow: "camera", iframeAllowFullscreen: true);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +68,7 @@ class _VerisyncViewState extends State<_VerisyncView> {
 
           /// Closes the view.
           onPressed: () {
-            widget.onError.call(context);
+            widget.onError?.call(context);
             _handleClose(context);
           },
         ),
@@ -84,8 +82,9 @@ class _VerisyncViewState extends State<_VerisyncView> {
 
   /// Builds the web view.
   Widget _buildWebView() {
+    var newRedirectUrl = "${widget.redirectUrl}?verisync-redirect";
     var webUri = WebUri(
-      "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=${widget.redirectUrl}&email=${widget.email}&metadata=${json.encode(widget.metadata)}",
+      "https://app.verisync.co/synchronizer/authorize?flow_id=${widget.flowId}&client_id=${widget.clientId}&redirect_url=$newRedirectUrl&email=${widget.email ?? ""}&metadata=${json.encode(widget.metadata ?? {})}",
     );
 
     return InAppWebView(
@@ -94,16 +93,17 @@ class _VerisyncViewState extends State<_VerisyncView> {
         url: webUri,
       ),
 
+      onUpdateVisitedHistory: (controller, url, androidIsReload) {
+        if (url!.queryParametersAll.containsKey('verisync-redirect')) {
+          widget.onSuccess?.call(context);
+          _handleClose(context);
+        }
+      },
+
       /// The settings for the web view.
       initialSettings: _settings,
       onWebViewCreated: (controller) => _webViewController = controller,
       onLoadStart: (controller, url) => setState(() {}),
-      onLoadStop: (controller, url) async {
-        if (url?.rawValue == widget.redirectUrl) {
-          widget.onSuccess(context);
-          _handleClose(context);
-        }
-      },
 
       /// Updates the progress.
       onProgressChanged: (controller, progress) => setState(() {
@@ -114,9 +114,7 @@ class _VerisyncViewState extends State<_VerisyncView> {
 
   /// Builds the progress bar.
   Widget _buildProgressBar() {
-    return _progress < 1.0
-        ? LinearProgressIndicator(value: _progress)
-        : Container();
+    return _progress < 1.0 ? LinearProgressIndicator(value: _progress) : Container();
   }
 
   /// Closes the view.
