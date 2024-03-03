@@ -3,7 +3,7 @@ part of "../src/verisync_button.dart";
 class _VerisyncView extends StatefulWidget {
   final String redirectUrl, flowId, clientId;
   final String? email;
-  final void Function(BuildContext context)? onSuccess, onError;
+  final void Function(BuildContext context)? onSuccess, onError, onClose;
   final Map<dynamic, dynamic>? metadata;
 
   /// [_VerisyncView] Creates a new Verisync view widget.
@@ -13,6 +13,7 @@ class _VerisyncView extends StatefulWidget {
   /// The [email] of the user to verify. This is an optional parameter.
   /// The [onSuccess] callback to be called when the verification process is successful. This is an optional parameter.
   /// The [onError] callback to be called when the verification process fails. This is an optional parameter.
+  /// The [onClose] callback to be called when the verification user specifically closes the verification dialog. This is an optional parameter.
   /// The [metadata] to be sent to the Verisync API. This is an optional parameter.
   const _VerisyncView({
     required this.redirectUrl,
@@ -20,6 +21,7 @@ class _VerisyncView extends StatefulWidget {
     required this.clientId,
     this.onSuccess,
     this.onError,
+    this.onClose,
     this.email,
     this.metadata,
   });
@@ -68,7 +70,7 @@ class _VerisyncViewState extends State<_VerisyncView> {
 
           /// Closes the view.
           onPressed: () {
-            widget.onError?.call(context);
+            widget.onClose?.call(context);
             _handleClose(context);
           },
         ),
