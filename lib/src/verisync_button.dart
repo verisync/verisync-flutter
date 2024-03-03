@@ -66,8 +66,7 @@ class VerisyncButton extends StatelessWidget {
       case PermissionStatus.denied:
 
         /// If the permission is denied, request for the permission.
-        await Permission.camera.request().then(
-            (value) => value.isGranted ? _showVerisyncView(context) : null);
+        await Permission.camera.request().then((value) => value.isGranted ? _showVerisyncView(context) : null);
         break;
 
       /// If the permission is permanently denied, show a dialog to open the settings.
@@ -97,8 +96,7 @@ class VerisyncButton extends StatelessWidget {
           TextButton(
             /// Opens the settings for the camera permission.
             onPressed: () async {
-              await openAppSettings()
-                  .then((value) => Navigator.of(context).pop());
+              await openAppSettings().then((value) => Navigator.of(context).pop());
             },
             child: const Text('Open Settings'),
           ),
@@ -118,24 +116,8 @@ class VerisyncButton extends StatelessWidget {
         clientId: clientId,
         email: email,
         metadata: metadata,
-        onSuccess: onSuccess ??
-            (BuildContext dialogContext) {
-              ScaffoldMessenger.of(dialogContext).showSnackBar(
-                const SnackBar(
-                  content: Text("Verification successful"),
-                  duration: Duration(seconds: 3),
-                ),
-              );
-            },
-        onError: onError ??
-            (BuildContext dialogContext) {
-              ScaffoldMessenger.of(dialogContext).showSnackBar(
-                const SnackBar(
-                  content: Text("Verification failed"),
-                  duration: Duration(seconds: 3),
-                ),
-              );
-            },
+        onSuccess: onSuccess,
+        onError: onError,
       ),
     );
   }
