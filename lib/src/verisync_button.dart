@@ -11,7 +11,7 @@ class VerisyncButton extends StatelessWidget {
 
   final String? email;
 
-  final void Function(BuildContext context)? onSuccess, onError;
+  final void Function(BuildContext context)? onSuccess, onError, onClose;
 
   final Map<dynamic, dynamic>? metadata;
 
@@ -26,6 +26,7 @@ class VerisyncButton extends StatelessWidget {
   /// The [VerisyncButton.email] of the user to verify. This is an optional parameter.
   /// The [VerisyncButton.onSuccess] callback to be called when the verification process is successful. This is an optional parameter.
   /// The [VerisyncButton.onError] callback to be called when the verification process fails. This is an optional parameter.
+  /// The [VerisyncButton.onClose] callback to be called when the verification user specifically closes the verification dialog. This is an optional parameter.
   /// The [VerisyncButton.metadata] to be sent to the Verisync API. This is an optional parameter.
   /// The [VerisyncButton.style] to be applied to the button. This is an optional parameter.
   /// The [VerisyncButton.child] to be displayed on the button. This is an optional parameter.
@@ -36,6 +37,7 @@ class VerisyncButton extends StatelessWidget {
     required this.clientId,
     this.onSuccess,
     this.onError,
+    this.onClose,
     this.email,
     this.metadata,
     this.style,
@@ -118,6 +120,7 @@ class VerisyncButton extends StatelessWidget {
         metadata: metadata,
         onSuccess: onSuccess,
         onError: onError,
+        onClose: onClose,
       ),
     );
   }
