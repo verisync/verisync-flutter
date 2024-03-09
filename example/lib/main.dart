@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               VerisyncButton(
-                flowId: "<your flowId>",
-                redirectUrl: "your redirectUrl",
-                clientId: "your clientId",
+                flowId: "3ea0117e-e04c-4d22-aec9-08fd5b2ab2da",
+                redirectUrl: "https://synchronizer-demo.vercel.app/success",
+                clientId: "71156b6946cc8917755d1ff815cd62cb",
               ),
             ],
           ),
