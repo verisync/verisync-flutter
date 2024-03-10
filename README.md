@@ -4,6 +4,12 @@
 
 The Verisync Identity Verification Button is a Flutter widget designed to simplify the process of integrating identity verification within your Flutter application. It wraps the complexity of initiating and handling identity verification flows into a simple, easy-to-use button widget.
 
+
+
+https://github.com/verisync/verisync-flutter/assets/16627656/5e03a5b9-fa08-425d-ac89-2d6198a08e36
+
+
+
 ## Features
 
 - **Simple Integration**: Just drop the `VerisyncButton` into your widget tree to get started.
